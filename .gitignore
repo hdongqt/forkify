@@ -1,0 +1,8 @@
+# Ignore parcel cache
+.parcel-cache/
+
+# Ignore parcel build results
+dist/
+
+# Ignore node_modules
+node_modules/
