@@ -11,6 +11,15 @@ class RecipeView extends View {
     ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
   }
 
+  addHandlerUpdateServings(handler) {
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--tiny');
+      if (!btn) return;
+      const updateTo = +btn.dataset.updateTo;
+      if (updateTo > 0) handler(updateTo);
+    });
+  }
+
   _generateMarkup() {
     return `  
      <figure class="recipe__fig">
@@ -24,7 +33,7 @@ class RecipeView extends View {
       <div class="recipe__details">
         <div class="recipe__info">
           <svg class="recipe__info-icon">
-            <use href="${icons}_icon-stopwatch"></use>
+            <use href="${icons}#icon-stopwatch"></use>
           </svg>
           <span class="recipe__info-data recipe__info-data--minutes">${
             this._data.cookingTime
@@ -33,7 +42,7 @@ class RecipeView extends View {
         </div>
         <div class="recipe__info">
           <svg class="recipe__info-icon">
-            <use href="${icons}_icon-man"></use>
+            <use href="${icons}#icon-man"></use>
           </svg>
           <span class="recipe__info-data recipe__info-data--people">${
             this._data.servings
@@ -41,27 +50,29 @@ class RecipeView extends View {
           <span class="recipe__info-text">servings</span>
 
           <div class="recipe__info-buttons">
-            <button class="btn--tiny btn--increase-servings">
+            <button data-update-to=${
+              this._data.servings - 1
+            } class="btn--tiny btn--increase-servings">
               <svg>
-                <use href="${icons}_icon-minus-circle"></use>
+                <use href="${icons}#icon-minus-circle"></use>
               </svg>
             </button>
-            <button class="btn--tiny btn--increase-servings">
+            <button data-update-to=${
+              this._data.servings + 1
+            } class="btn--tiny btn--increase-servings">
               <svg>
-                <use href="${icons}_icon-plus-circle"></use>
+                <use href="${icons}#icon-plus-circle"></use>
               </svg>
             </button>
           </div>
         </div>
 
         <div class="recipe__user-generated">
-          <svg>
-            <use href="${icons}_icon-user"></use>
-          </svg>
+         
         </div>
         <button class="btn--round">
           <svg class="">
-            <use href="${icons}_icon-bookmark-fill"></use>
+            <use href="${icons}#icon-bookmark-fill"></use>
           </svg>
         </button>
       </div>
@@ -89,7 +100,7 @@ class RecipeView extends View {
         >
           <span>Directions</span>
           <svg class="search__icon">
-            <use href="${icons}_icon-arrow-right"></use>
+            <use href="${icons}#icon-arrow-right"></use>
           </svg>
         </a>
       </div>
@@ -101,7 +112,7 @@ class RecipeView extends View {
     return `
         <li class="recipe__ingredient">
           <svg class="recipe__icon">
-            <use href="${icons}_icon-check"></use>
+            <use href="${icons}#icon-check"></use>
           </svg>
           <div class="recipe__quantity">${
             ing.quantity ? fracty(ing.quantity) : ''

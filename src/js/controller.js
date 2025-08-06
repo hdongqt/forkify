@@ -1,11 +1,15 @@
 import * as model from './model.js';
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
+import resultsView from './views/resultView.js';
+import paginationView from './views/paginationView.js';
 
-import icons from 'url:../img/icons.svg';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
-const recipeContainer = document.querySelector('.recipe');
+
+if (module.hot) {
+  module.hot.accept();
+}
 
 const showRecipe = async function () {
   try {
@@ -26,16 +30,30 @@ const controlSearchResults = async function () {
   try {
     const query = document.querySelector('.search__field').value;
     if (!query) return;
-    await model.loadSearchResult('pizza');
-    searchView.render(model.state.search.results);
+    resultsView.renderSpinner();
+    await model.loadSearchResult(query);
+    // resultsView.render(model.state.search.results);
+    resultsView.render(model.getSearchResultsPage(1));
+    paginationView.render(model.state.search);
   } catch (err) {
     console.log(err);
   }
 };
 
+const controlPagination = function (goToPage) {
+  resultsView.render(model.getSearchResultsPage(goToPage));
+  paginationView.render(model.state.search);
+};
+
+const controlServings = function (newServings) {
+  model.updateServings(newServings);
+  recipeView.render(model.state.recipe);
+};
+
 const init = function () {
   recipeView.addHandlerRender(showRecipe);
   searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
+  recipeView.addHandlerUpdateServings(controlServings);
 };
-
 init();
