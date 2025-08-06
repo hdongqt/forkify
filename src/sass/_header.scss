@@ -141,4 +141,13 @@
     visibility: visible;
     opacity: 1;
   }
+
+  &__btn {
+    font-weight: 600;
+    font-size: 1.6rem;
+    font-family: inherit;
+    margin: 0 auto;
+    margin-top: 0.5rem;
+    background-color: #fff;
+  }
 }
