@@ -2,7 +2,12 @@ import icons from 'url:../../img/icons.svg';
 
 export default class View {
   _data;
-
+  /**
+   * REnder the received object to the DOM
+   * @param {Object | Object[]} data The data to be rendered
+   * @param {boolean} render If false, create markup string instead of rendering
+   * @returns
+   */
   render(data, render = true) {
     if (!data || data.length === 0) return this.renderError();
     this._data = data;
@@ -55,6 +60,19 @@ export default class View {
         <div>
           <svg>d
             <use href="${icons}#icon-alert-triangle"></use>
+          </svg>
+        </div>
+        <p>${message}</p>
+      </div>`;
+    this._clear();
+    this._parentElement.insertAdjacentHTML('afterbegin', markup);
+  }
+
+  renderMessage(message = this._message) {
+    const markup = `<div class="message">
+        <div>
+          <svg>
+            <use href="${icons}#icon-smile"></use>
           </svg>
         </div>
         <p>${message}</p>
