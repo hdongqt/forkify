@@ -58,7 +58,7 @@ export default class View {
   renderError(message = this._errorMessage) {
     const markup = `<div class="error">
         <div>
-          <svg>d
+          <svg>
             <use href="${icons}#icon-alert-triangle"></use>
           </svg>
         </div>
