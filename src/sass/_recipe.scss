@@ -1,5 +1,6 @@
 .recipe {
   background-color: $color-grey-light-1;
+  grid-area: recipe;
 
   ///////////
   // FIGURE
@@ -68,6 +69,20 @@
     display: flex;
     align-items: center;
     padding: 7.5rem 8rem 3.5rem 8rem;
+
+    @media only screen and (max-width: $bp-small) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      row-gap: 1.5rem;
+      & .btn--increase-servings {
+        width: 3.2rem;
+        height: 3.2rem;
+      }
+      & .btn--bookmark {
+        width: 5rem;
+        height: 5rem;
+      }
+    }
   }
 
   &__info {
@@ -129,6 +144,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media only screen and (max-width: $bp-medium) {
+      padding: 2.5rem;
+    }
   }
 
   &__ingredient-list {
@@ -175,5 +194,20 @@
 
   &__publisher {
     font-weight: 700;
+  }
+
+  & .message {
+    ul {
+      margin-top: 1.8rem;
+      font-size: 1.6rem;
+      li + li {
+        margin-top: 1.4rem;
+      }
+    }
+    &__info {
+      display: flex;
+      align-items: center;
+      column-gap: 1.2rem;
+    }
   }
 }

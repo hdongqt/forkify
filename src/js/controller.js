@@ -9,12 +9,13 @@ import { MODAL_CLOSE_SEC } from './config.js';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
+import notfoundView from './views/notfoundView.js';
 
 // if (module.hot) {
 //   module.hot.accept();
 // }
 
-const showRecipe = async function () {
+const controlRecipe = async function () {
   try {
     const id = window.location.hash.slice(1);
 
@@ -80,7 +81,7 @@ const controlAddRecipe = async function (newRecipe) {
     addRecipeView.renderMessage();
     bookmarksView.render(model.state.bookmarks);
     setTimeout(function () {
-      addRecipeView.toggleWindow();
+      addRecipeView.closeWindow();
     }, MODAL_CLOSE_SEC * 1000);
     window.history.pushState(null, '', `#${model.state.recipe.id}`);
   } catch (err) {
@@ -89,10 +90,18 @@ const controlAddRecipe = async function (newRecipe) {
   }
 };
 
+const controlNotFoundPage = function () {
+  const pathname = window.location.pathname;
+  if (pathname !== '/')
+    notfoundView.renderError(
+      '<span class="error-notfound">Feature is coming soon 😊  <br><a href="/" class="btn--inline error-notfound__btn">Go Home</a></span>'
+    );
+};
 const init = function () {
+  controlNotFoundPage();
   bookmarksView.addHandlerRender(controlBookmarks);
   bookmarksView.clearBookmarks(clearBookmarks);
-  recipeView.addHandlerRender(showRecipe);
+  recipeView.addHandlerRender(controlRecipe);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
   recipeView.addHandlerUpdateServings(controlServings);
