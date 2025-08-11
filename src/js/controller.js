@@ -5,11 +5,11 @@ import resultsView from './views/resultView.js';
 import paginationView from './views/paginationView.js';
 import bookmarksView from './views/bookmarksView.js';
 import addRecipeView from './views/addRecipeView.js';
+import notFoundView from './views/notFoundView.js';
 import { MODAL_CLOSE_SEC } from './config.js';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
-import notfoundView from './views/notfoundView.js';
 
 // if (module.hot) {
 //   module.hot.accept();
@@ -93,12 +93,12 @@ const controlAddRecipe = async function (newRecipe) {
 const controlNotFoundPage = function () {
   const pathname = window.location.pathname;
   if (pathname !== '/')
-    notfoundView.renderError(
+    notFoundView.renderError(
       '<span class="error-notfound">Feature is coming soon 😊  <br><a href="/" class="btn--inline error-notfound__btn">Go Home</a></span>'
     );
 };
 const init = function () {
-  notfoundView.addHandlerRender(controlNotFoundPage);
+  notFoundView.addHandlerRender(controlNotFoundPage);
   bookmarksView.addHandlerRender(controlBookmarks);
   bookmarksView.clearBookmarks(clearBookmarks);
   recipeView.addHandlerRender(controlRecipe);
