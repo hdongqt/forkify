@@ -98,7 +98,7 @@ const controlNotFoundPage = function () {
     );
 };
 const init = function () {
-  controlNotFoundPage();
+  notfoundView.addHandlerRender(controlNotFoundPage);
   bookmarksView.addHandlerRender(controlBookmarks);
   bookmarksView.clearBookmarks(clearBookmarks);
   recipeView.addHandlerRender(controlRecipe);

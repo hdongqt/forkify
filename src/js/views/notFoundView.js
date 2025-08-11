@@ -16,6 +16,10 @@ class NotFoundView extends View {
      </div>
     `;
   }
+
+  addHandlerRender(handler) {
+    ['load'].forEach(ev => window.addEventListener(ev, handler));
+  }
 }
 
 export default new NotFoundView();
