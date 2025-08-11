@@ -210,4 +210,22 @@
     line-height: 1.5;
     font-weight: 600;
   }
+
+  &-notfound {
+    text-align: center;
+    display: block;
+    & .error-notfound__btn {
+      justify-content: center;
+      margin-top: 2rem;
+      font-size: 1.6rem;
+      text-decoration: none;
+      padding: 1.2rem 1.8rem;
+      background-color: $color-primary;
+      color: #fff;
+      &:hover {
+        background-color: #fff;
+        color: $color-primary;
+      }
+    }
+  }
 }

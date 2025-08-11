@@ -2,6 +2,10 @@
   padding: 3rem 0;
   display: flex;
   flex-direction: column;
+  grid-area: list;
+  @media only screen and (max-width: $bp-small) {
+    padding-top: 1rem;
+  }
 }
 
 .results {
@@ -38,5 +42,8 @@
   .twitter-link:link,
   .twitter-link:visited {
     color: $color-grey-dark-2;
+  }
+  @media only screen and (max-width: $bp-small) {
+    display: none;
   }
 }
